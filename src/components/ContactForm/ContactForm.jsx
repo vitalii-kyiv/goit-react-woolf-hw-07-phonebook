@@ -1,6 +1,5 @@
-import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'store/contactsSlice/contactsSlice';
+import {  addContactThunk } from 'store/contactsSlice/contactsThunk';
 import { selectContacts } from 'store/selector';
 
 const ContactForm = () => {
@@ -18,11 +17,10 @@ const ContactForm = () => {
     }
 
     const contact = {
-      id: nanoid(),
       name,
       number,
     };
-    dispatch(addContact(contact));
+    dispatch(addContactThunk(contact));
   };
 
   const handleSubmit = evt => {
