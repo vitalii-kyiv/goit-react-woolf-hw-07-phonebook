@@ -1,48 +1,12 @@
 import Filter from './Filter/Filter';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
-import {
-  addContactApi,
-  deleteContactApi,
-  fetchContactsApi,
-} from 'api/contactsService';
+import { useSelector } from 'react-redux';
+import { selectError, selectIsLoading } from 'store/selector';
 
-// fetchContactsApi();
-// console.log('fetchContactsApi()', fetchContactsApi());
-
-// const fetchContacts = async () => {
-//   try {
-//     const data = await fetchContactsApi();
-//     console.log('data', data);
-//   } catch (error) {
-//     console.log('error', error);
-//   }
-// };
-// const contactData = {
-//   name: 'John Doe',
-//   number: '123-456-7890',
-// };
-
-// const addContact = async contactData => {
-//   try {
-//     const data = await addContactApi(contactData);
-//     console.log('data', data);
-//   } catch (error) {
-//     console.log('error', error);
-//   }
-// };
-// const deleteContact = async id => {
-//   try {
-//     const data = await deleteContactApi(id);
-//     console.log('data', data);
-//   } catch (error) {
-//     console.log('error', error);
-//   }
-// };
-// deleteContact(13);
-// addContact(contactData);
-// fetchContacts();
 const App = () => {
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
   return (
     <div
       style={{
@@ -63,6 +27,8 @@ const App = () => {
         <ContactForm />
         <h2>Contacts</h2>
         <Filter />
+        {isLoading && <h1>Loading...</h1>}
+        {error && <h1>{error}</h1>}
         <ContactList />
       </div>
     </div>

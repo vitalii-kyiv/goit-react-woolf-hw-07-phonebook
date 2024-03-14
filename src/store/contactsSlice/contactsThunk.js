@@ -1,22 +1,21 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addContactApi, deleteContactApi, fetchContactsApi } from "api/contactsService";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  addContactApi,
+  deleteContactApi,
+  fetchContactsApi,
+} from 'api/contactsService';
 
 export const fetchContactsThunk = createAsyncThunk(
   'contacts/fetchAll',
-  async (_, thunkApi) => {
-    try {
-      const response = await fetchContactsApi();
+  async () => {
+    const response = await fetchContactsApi();
     return response;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error)
-    }
-    
   }
 );
 
 export const addContactThunk = createAsyncThunk(
   'contacts/addContact',
-  async (contact) => {
+  async contact => {
     const response = await addContactApi(contact);
     return response;
   }
@@ -24,7 +23,7 @@ export const addContactThunk = createAsyncThunk(
 
 export const deleteContactThunk = createAsyncThunk(
   'contacts/deleteContact',
-  async (contactId) => {
+  async contactId => {
     await deleteContactApi(contactId);
     return contactId;
   }
